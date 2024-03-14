@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="employeeApp">
+<head>
+ <meta charset="UTF-8">
+ <title>Employee List</title>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+ <style>
+ body {
+ font-family: Arial, sans-serif;
+ background-color: #f4f4f4;
+ margin: 0;
+ padding: 0;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ height: 100vh;
+ }
+ .employee-container {
+ background-color: #fff;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ padding: 20px;
+ border-radius: 5px;
+ text-align: center;
+ }
+ label {
+ display: block;
+ margin-bottom: 5px;
+ color: #333;
+ }
+ input {
+ width: 100%;
+ padding: 8px;
+ border-radius: 5px;
+ border: 1px solid #ddd;
+ margin-bottom: 10px;
+ }
+ ul {
+ list-style-type: none;
+ padding: 0;
+ margin: 0;
+ }
+ li {
+ margin-bottom: 10px;
+ padding: 10px;
+ border: 1px solid #ddd;
+ border-radius: 5px;
+ background-color: #fff;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ }
+ li span {
+ flex-grow: 1;
+ }
+ .no-results {
+ color: #555;
+ margin-top: 10px;
+ }
+ </style>
+</head>
+<body ng-controller="EmployeeController">
+ <div class="employee-container">
+ <h2>Employee List</h2>
+ <label for="searchName">Search by Name:</label>
+ <input type="text" id="searchName" ng-model="searchName">
+ <label for="searchSalary">Search by Salary:</label>
+ <input type="number" id="searchSalary" ng-model="searchSalary">
+ <ul>
+ <li ng-repeat="employee in employees | filter: {name: searchName, salary: searchSalary}">
+ <span>{{ employee.name }}</span>
+ <span>Salary: {{ employee.salary }}</span>
+ </li>
+ </ul>
+ <p class="no-results" ng-show="(employees | filter: {name: searchName, salary: 
+searchSalary}).length === 0">
+ No results found.
+ </p>
+ </div>
+ <script>
+ angular.module('employeeApp', [])
+ .controller('EmployeeController', function ($scope) {
+ $scope.employees = [
+ { name: 'John Doe', salary: 50000 },
+ { name: 'Jane Smith', salary: 60000 },
+ { name: 'Bob Johnson', salary: 55000 },
+
+ ];
+ });
+ </script>
+</body>
+</html>
+//
+<!DOCTYPE html>
+<html ng-app="itemApp">
+<head>
+ <title>Item Collection</title>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+ <style>
+ body {
+ font-family: Arial, sans-serif;
+ background-color: #f4f4f4;
+ margin: 0;
+ padding: 0;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ height: 100vh;
+ }
+ .container {
+ background-color: #fff;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ padding: 20px;
+ border-radius: 5px;
+ text-align: center;
+ }
+ h2 {
+ color: #333;
+ }
+ label {
+ display: block;
+ margin-bottom: 5px;
+ color: #333;
+ }
+ input {
+ width: 70%;
+ padding: 8px;
+ border-radius: 5px;
+ border: 1px solid #ddd;
+ margin-bottom: 10px;
+ }
+ button {
+ background-color: #4caf50;
+ color: white;
+ border: none;
+ border-radius: 3px;
+ padding: 8px;
+ cursor: pointer;
+ margin-left: 5px;
+ }
+ button:hover {
+ background-color: #45a049;
+ }
+ ul {
+ list-style-type: none;
+ padding: 0;
+ margin: 0;
+ }
+li {
+ margin-bottom: 10px;
+ padding: 10px;
+ border: 1px solid #ddd;
+ border-radius: 5px;
+ background-color: #fff;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ }
+ p {
+ color: #555;
+ }
+ </style>
+</head>
+<body ng-controller="ItemController">
+ <div class="container">
+ <h2>Item Collection</h2>
+ <label>Add Item:</label>
+ <input type="text" ng-model="newItem">
+ <button ng-click="addItem()">Add</button>
+ <ul>
+ <li ng-repeat="item in items">
+ {{ item }}
+ <button ng-click="removeItem($index)">Remove</button>
+ </li>
+ </ul>
+ <p>Total Items: {{ items.length }}</p>
+ </div>
+ <script>
+ angular.module('itemApp', [])
+ .controller('ItemController', function ($scope) {
+ $scope.items = [];
+ $scope.addItem = function () {
+ if ($scope.newItem) {
+ $scope.items.push($scope.newItem);
+ $scope.newItem = '';
+ }
+ };
+ $scope.removeItem = function (index) {
+ $scope.items.splice(index, 1);
+ };
+ });
+ </script>
+</body>
+</html>
+///
+<!DOCTYPE html>
+<html lang="en" ng-app="studentApp">
+<head>
+ <meta charset="UTF-8">
+ <title>Student Details Uppercase</title>
+ <script 
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+ <style>
+ body {
+ font-family: Arial, sans-serif;
+ background-color: #f4f4f4;
+ margin: 0;
+ padding: 0;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ height: 100vh;
+ }
+ .student-container {
+ background-color: #fff;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ padding: 20px;
+ border-radius: 5px;
+ text-align: center;
+ }
+ h2 {
+ color: #333;
+ }
+ input {
+ width: 70%;
+ padding: 8px;
+ border-radius: 5px;
+ border: 1px solid #ddd;
+ margin-bottom: 10px;
+ }
+ button {
+ background-color: #4caf50;
+ color: white;
+ border: none;
+ border-radius: 3px;
+ padding: 8px;
+ cursor: pointer;
+ }
+ button:hover {
+ background-color: #45a049;
+ }
+ p {
+ text-align: center;
+ color: #555;
+ }
+ </style>
+</head>
+<body ng-controller="StudentController">
+ <div class="student-container">
+ <h2>Student Details Uppercase</h2>
+ <label for="inputName">Enter Name:</label>
+ <input type="text" id="inputName" ng-model="userInput">
+ <button ng-click="convertToUppercase()">Convert to Uppercase</button>
+ <p>Uppercase Input: {{ uppercaseResult }}</p>
+ </div>
+ <script>
+ angular.module('studentApp', [])
+ .controller('StudentController', function ($scope) {
+ $scope.userInput = '';
+ $scope.uppercaseResult = '';
+ $scope.convertToUppercase = function () {
+ $scope.uppercaseResult = $scope.userInput.toUpperCase();
+ };
+ });
+ </script>
+</body>
+</html>
+//
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+ <title>AngularJS Date Display</title>
+ <style>
+ body {
+ font-family: Arial, sans-serif;
+ background-color: #f4f4f4;
+ margin: 0;
+ padding: 0;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ height: 100vh;
+ }
+ .date-container {
+ text-align: center;
+ }
+ .date {
+ font-size: 24px;
+ color: #333;
+ }
+ </style>
+</head>
+<body>
+ <div ng-controller="DateController" class="date-container">
+ <h1>Current Date:</h1>
+ <div class="date">{{ currentDate | date:'fullDate' }}</div>
+ </div>
+ <script 
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+ <script>
+ var app = angular.module('myApp', []);
+ app.controller('DateController', function ($scope, $interval) {
+ $interval(function () {
+ $scope.currentDate = new Date();
+ }, 1000);
+ });
+ </script>
+</body>
+</html>
